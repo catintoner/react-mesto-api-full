@@ -39,7 +39,6 @@ class Auth {
     .then(this._checkResponse)
 
     .then(((res) => {
-      console.dir(res)
       localStorage.setItem("user", res);
     }))
   }
@@ -59,5 +58,5 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: `http://localhost:3001`
+  baseUrl: `https://api.catintoner.nomorepartiesxyz.ru`
 })

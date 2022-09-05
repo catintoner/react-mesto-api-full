@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const InccorectInfoError = require('../errors/IncorrectInfoError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const handleAuthError = () => {
   throw new InccorectInfoError('Необходима авторизация');
 };
@@ -19,7 +21,7 @@ module.exports = (request, response, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, 'some-secret-key');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
     handleAuthError();
     return;

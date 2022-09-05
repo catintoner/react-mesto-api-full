@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-// const oisProduction = process.env.mode === 'PRODUCTION';
-
 const ValidateError = require('../errors/ValidateError');
 const NotFoundError = require('../errors/NotFoundError');
 const UniqueEmailError = require('../errors/UniqueEmailError');
 
 const { OK, CREATED_CODE } = require('../utils/constants');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.login = (request, response, next) => {
   const { email, password } = request.body;
@@ -20,7 +20,7 @@ module.exports.login = (request, response, next) => {
         {
           _id: user._id,
         },
-        'some-secret-key',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         {
           expiresIn: '7d',
         },
