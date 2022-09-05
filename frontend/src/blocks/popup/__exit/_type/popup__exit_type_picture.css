@@ -1,0 +1,11 @@
+.popup__exit_type_picture {
+  margin: 0 0 8px 8px;
+}
+
+@media screen and (max-width: 767px) {
+
+  .popup__exit_type_picture {
+    grid-area: 1/2/1/3;
+    margin: 0 0 16px;
+  }
+}

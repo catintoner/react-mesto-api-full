@@ -1,0 +1,29 @@
+.popup__exit {
+  justify-self: flex-start;
+  grid-area: 1/3/1/4;
+  width: 32px;
+  height: 32px;
+  z-index: 2;
+  transition: .2s;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-image: url('../../../images/Close_Icon.svg');
+}
+
+.popup__exit:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+
+  .popup__exit {
+    width: 19px;
+    height: 19px;
+    margin: 0 0 16px;
+    grid-area: 1/2/1/3;
+    justify-self: flex-end;
+    background-size: 19px 19px;
+  }
+}

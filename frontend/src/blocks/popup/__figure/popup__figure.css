@@ -1,0 +1,6 @@
+.popup__figure {
+  max-width: 100%;
+  margin: 0;
+  z-index: 1;
+  grid-area: 2/2/2/3;
+}

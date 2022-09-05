@@ -1,0 +1,16 @@
+.popup_type_picture {
+  grid-template-columns: 1fr max-content 1fr;
+  z-index: 3;
+}
+
+.popup_type_picture::before {
+  background-color: rgba(0, 0, 0, .9);
+}
+
+@media screen and (max-width: 767px) {
+
+  .popup_type_picture {
+    grid-template-columns: max-content;
+    gap: unset;
+  }
+}

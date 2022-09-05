@@ -1,0 +1,8 @@
+.header__button_type_logg-out {
+  color: #a9a9a9;
+  transition: .2s;
+}
+
+.header__button_type_logg-out:hover {
+  color: white;
+}

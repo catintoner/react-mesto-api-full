@@ -1,0 +1,21 @@
+.sign__input {
+  width: 100%;
+  margin: 0 0 30px;
+  padding: 0 0 15px;
+  border: none;
+  border-bottom: 2px solid white;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+}
+
+.sign__input:last-of-type {
+  margin: 0 0 216px;
+}
+
+.sign__input:focus {
+  outline: none;
+  border-bottom: 4px solid white;
+}
