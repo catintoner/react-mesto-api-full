@@ -1,11 +1,6 @@
-const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
-  'http://localhost:3000',
-];
+const { DEFAULT_ALLOWED_METHODS, allowedCors } = require('../utils/constants');
 
 module.exports = function cors(request, response, next) {
-  const DEFAULT_ALLOWED_METHODS = 'GET, HEAD, PUT, PATCH, POST, DELETE';
   const { method } = request;
   const { origin } = request.headers;
   const requestHeaders = request.headers['access-control-request-headers'];
