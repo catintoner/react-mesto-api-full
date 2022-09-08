@@ -28,6 +28,7 @@ module.exports.login = (request, response, next) => {
       response.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
+        secure: NODE_ENV === 'production',
       }).status(OK).send(user._id);
     })
     .catch(next);
