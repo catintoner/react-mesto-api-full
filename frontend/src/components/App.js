@@ -194,7 +194,7 @@ function App() {
 
   function handleCheckToken() {
     const userId = localStorage.getItem("user");
-    if (userId) {
+    if (userId && userId !== null) {
 
       return auth.checkToken(userId)
 
@@ -208,6 +208,7 @@ function App() {
           console.log(err);
         })
     }
+    return;
   }
 
   function handleOutAccount() {

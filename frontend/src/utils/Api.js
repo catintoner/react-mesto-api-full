@@ -94,7 +94,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.catintoner.nomorepartiesxyz.ru',
   headers: {
     'Content-Type': 'application/json'
   }
