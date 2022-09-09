@@ -8,9 +8,12 @@ const ValidateError = require('../errors/ValidateError');
 const NotFoundError = require('../errors/NotFoundError');
 const UniqueEmailError = require('../errors/UniqueEmailError');
 
-const { OK, CREATED_CODE } = require('../utils/constants');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
+const {
+  OK,
+  CREATED_CODE,
+  JWT,
+  isProduction,
+} = require('../utils/constants');
 
 module.exports.login = (request, response, next) => {
   const { email, password } = request.body;
@@ -20,7 +23,7 @@ module.exports.login = (request, response, next) => {
         {
           _id: user._id,
         },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        JWT,
         {
           expiresIn: '7d',
         },
@@ -28,7 +31,7 @@ module.exports.login = (request, response, next) => {
       response.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
-        secure: NODE_ENV === 'production',
+        secure: isProduction,
       }).status(OK).send(user._id);
     })
     .catch(next);
@@ -113,7 +116,7 @@ module.exports.updateUserProfile = (request, response, next) => {
   })
     .orFail(new NotFoundError('Пользователь не найден'))
     .then((user) => {
-      response.status(OK).send({ user });
+      response.status(OK).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

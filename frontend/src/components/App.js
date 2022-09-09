@@ -207,8 +207,9 @@ function App() {
         .catch((err) => {
           console.log(err);
         })
+    } else {
+      setLoggedIn(false);
     }
-    return;
   }
 
   function handleOutAccount() {
