@@ -135,7 +135,7 @@ module.exports.updateUserAvatar = (request, response, next) => {
   })
     .orFail(new NotFoundError('Пользователь не найден'))
     .then((user) => {
-      response.status(OK).send({ user });
+      response.status(OK).send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
