@@ -58,5 +58,5 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: `https://api.catintoner.nomorepartiesxyz.ru`
+  baseUrl: `http://localhost:3001`
 })
