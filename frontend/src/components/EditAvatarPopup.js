@@ -33,7 +33,6 @@ function EditAvatarPopup(props) {
           required
           autoComplete="off"
           ref={avatarRef}
-          value=""
         />
         <span className="popup__error avatar-error">
         </span>
