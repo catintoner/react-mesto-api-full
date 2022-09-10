@@ -1,3 +1,5 @@
+import { BASE_URL } from './constants';
+
 class Auth {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -38,9 +40,20 @@ class Auth {
     })
     .then(this._checkResponse)
 
-    .then(((res) => {
+    .then((res) => {
       localStorage.setItem("user", res);
-    }))
+    })
+  }
+
+  logout() {
+    return fetch(`${this._baseUrl}/signout`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    })
+    .then(this._checkResponse)
   }
 
   checkToken(userId) {
@@ -58,5 +71,5 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: `https://api.catintoner.nomorepartiesxyz.ru`
+  baseUrl: BASE_URL
 })

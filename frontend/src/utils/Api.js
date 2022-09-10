@@ -1,3 +1,5 @@
+import { BASE_URL } from "./constants";
+
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -94,7 +96,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://api.catintoner.nomorepartiesxyz.ru',
+  baseUrl: BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   }

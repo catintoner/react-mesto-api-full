@@ -213,8 +213,16 @@ function App() {
   }
 
   function handleOutAccount() {
-    localStorage.removeItem("user");
-    setLoggedIn(false);
+    auth.logout()
+
+      .then(() => {
+        localStorage.removeItem("user");
+        setLoggedIn(false);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handleLoginSubmit(email, password) {
