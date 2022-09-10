@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://catintoner.nomorepartiesxyz.ru';
+export const BASE_URL = 'https://api.catintoner.nomorepartiesxyz.ru';
 
-//https://catintoner.nomorepartiesxyz.ru
+//https://api.catintoner.nomorepartiesxyz.ru
 //http://localhost:3001
