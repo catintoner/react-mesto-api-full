@@ -1,4 +1,4 @@
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET, PORT } = process.env;
 
 const SERVER_ERROR = 500;
 const CREATED_CODE = 201;
@@ -18,6 +18,10 @@ const isProduction = NODE_ENV === 'production';
 
 const JWT = isProduction ? JWT_SECRET : 'dev-secret';
 
+const SERVER_PORT = isProduction ? PORT : 3001;
+
+const isValidityUrl = /^https?:\/\/(www\.)?[\w\d]*\.([\S\w._~:?#[\]@!$&'()*+,;=\-/])*#?$/;
+
 module.exports = {
   SERVER_ERROR,
   CREATED_CODE,
@@ -26,4 +30,6 @@ module.exports = {
   allowedCors,
   isProduction,
   JWT,
+  SERVER_PORT,
+  isValidityUrl,
 };

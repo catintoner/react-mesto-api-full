@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const InccorectInfoError = require('../errors/IncorrectInfoError');
 
+const { isValidityUrl } = require('../utils/constants');
+
 const userSchema = new mongoose.Schema({
 
   email: {
@@ -42,7 +44,7 @@ const userSchema = new mongoose.Schema({
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator(v) {
-        return /^https?:\/\/(www.)?([\S\w-._~:/?#[\]@!$&'()*+,;=])*(#)?$/.test(v);
+        return isValidityUrl.test(v);
       },
     },
   },

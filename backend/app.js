@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { Joi, celebrate, errors } = require('celebrate');
+const { errors } = require('celebrate');
 
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
@@ -14,10 +14,10 @@ const cardRouter = require('./routes/cards');
 
 const { login, createUser } = require('./controllers/users');
 
-const { SERVER_ERROR } = require('./utils/constants');
+const { OK, SERVER_ERROR, SERVER_PORT } = require('./utils/constants');
 const NotFoundError = require('./errors/NotFoundError');
+const { validateAuth, validateUserBody } = require('./middlewares/validations');
 
-const { PORT = 3001 } = process.env;
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
@@ -38,36 +38,27 @@ app.use(requestLogger);
 
 app.post(
   '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-    }),
-  }),
+  validateAuth,
   login,
 );
 
 app.post(
   '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-      name: Joi.string().min(2).max(30),
-      about: Joi.string().min(2).max(30),
-      avatar: Joi.string().pattern(/^https?:\/\/(www.)?([\S\w-._~:/?#[\]@!$&'()*+,;=])*(#)?$/),
-    }),
-  }),
+  validateUserBody,
   createUser,
 );
+
+app.get('/signout', (request, response) => {
+  response.clearCookie('jwt').status(OK).send({ message: 'Выход' });
+});
 
 app.use(cookieParser());
 
 app.use('/', auth);
 
-app.use('/users', auth, router);
+app.use('/users', router);
 
-app.use('/cards', auth, cardRouter);
+app.use('/cards', cardRouter);
 
 app.use('*', (request, response, next) => {
   next(new NotFoundError('Запрашиваемая страница не найдена'));
@@ -86,7 +77,7 @@ app.use((err, request, response, next) => {
   next();
 });
 
-app.listen(PORT, () => {
+app.listen(SERVER_PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`its my server on port ${PORT}`);
+  console.log(`its my server on port ${SERVER_PORT}`);
 });

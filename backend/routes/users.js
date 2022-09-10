@@ -10,6 +10,8 @@ const {
   updateUserAvatar,
 } = require('../controllers/users');
 
+const { isValidityUrl } = require('../utils/constants');
+
 router.get('/', getUsers);
 
 router.get('/me', getUserInfo);
@@ -39,7 +41,7 @@ router.patch(
   '/me/avatar',
   celebrate({
     body: Joi.object().keys({
-      avatar: Joi.string().pattern(/^https?:\/\/(www.)?([\S\w-._~:/?#[\]@!$&'()*+,;=])*(#)?$/),
+      avatar: Joi.string().regex(isValidityUrl),
     }),
   }),
   updateUserAvatar,

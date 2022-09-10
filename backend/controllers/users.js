@@ -75,7 +75,8 @@ module.exports.createUser = (request, response, next) => {
             next(err);
           }
         });
-    });
+    })
+    .catch(next);
 };
 
 module.exports.getUserById = (request, response, next) => {
@@ -85,11 +86,7 @@ module.exports.getUserById = (request, response, next) => {
       response.status(OK).send(user);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new ValidateError('Указанные данные не корректны'));
-      } else {
-        next(err);
-      }
+      next(err);
     });
 };
 

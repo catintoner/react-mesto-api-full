@@ -11,6 +11,8 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 
+const { isValidityUrl } = require('../utils/constants');
+
 const validationCardId = {
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
@@ -34,7 +36,7 @@ cardRouter.post(
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
-      link: Joi.string().required().pattern(/^https?:\/\/(www.)?([\S\w-._~:/?#[\]@!$&'()*+,;=])*(#)?$/),
+      link: Joi.string().required().regex(isValidityUrl),
     }),
   }),
   createCard,
