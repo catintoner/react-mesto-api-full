@@ -86,7 +86,11 @@ module.exports.getUserById = (request, response, next) => {
       response.status(OK).send(user);
     })
     .catch((err) => {
-      next(err);
+      if (err.name === 'CastError') {
+        next(new ValidateError('Указанные данные не корректны'));
+      } else {
+        next(err);
+      }
     });
 };
 
@@ -97,11 +101,7 @@ module.exports.getUserInfo = (request, response, next) => {
       response.status(OK).send(user);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new ValidateError('Указанные данные не корректны'));
-      } else {
-        next(err);
-      }
+      next(err);
     });
 };
 
